@@ -29,7 +29,7 @@ class Card:
         self.value = value
 
     def __repr__(self):
-    	return f"{self.value} of {self.suit}"
+    	return str(self.value) + " of " + str(self.suit)
 
 class Deck:
     def __init__(self):
@@ -40,7 +40,16 @@ class Deck:
       #   for v in values:
       #       self.cards.append(Card(v,s))
     def __repr__(self):
-        return f"Deck of {self.count()} cards"
+        return "Deck of " + str(self.count()) + " cards"
+
+    def __iter__(self):
+        return iter(self.cards)
+    
+    def reset(self):
+        suits = ("Hearts", "Diamonds", "Clubs", "Spades")
+        values = ("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K")
+        self.cards = [Card(v, s) for s in suits for v in values]
+
 
     def count(self):
         return len(self.cards)
@@ -68,3 +77,7 @@ class Deck:
         shuffle(self.cards)
         shuffle(self.cards)
         return self
+
+# d = Deck()
+# for c in d:
+#     print c
